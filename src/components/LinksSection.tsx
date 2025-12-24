@@ -71,26 +71,38 @@ export default function LinksSection() {
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ delay: index * 0.1, duration: 0.6 }}
-              whileHover={{ scale: 1.03, y: -5 }}
-              whileTap={{ scale: 0.98 }}
-              className="glass-card p-6 rounded-2xl flex items-center gap-4 group cursor-pointer hover-lift"
+              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50, rotateY: 20 }}
+              animate={isInView ? { opacity: 1, x: 0, rotateY: 0 } : {}}
+              transition={{ delay: index * 0.1, duration: 0.6, type: 'spring' }}
+              whileHover={{ scale: 1.08, y: -8, boxShadow: '0 20px 40px rgba(0, 0, 0, 0.2)' }}
+              whileTap={{ scale: 0.95 }}
+              className="glass-card p-6 rounded-2xl flex items-center gap-4 group cursor-pointer hover-lift border border-border/50 hover:border-primary/50 transition-colors"
             >
-              <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${link.color} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform`}>
+              <motion.div 
+                className={`w-14 h-14 rounded-xl bg-gradient-to-br ${link.color} flex items-center justify-center shrink-0`}
+                whileHover={{ rotate: 10, scale: 1.15 }}
+                whileTap={{ scale: 0.9 }}
+              >
                 {link.logo ? (
                   <img src={link.logo} alt={link.title} className="w-10 h-10 object-contain" />
                 ) : (
                   <link.icon className="w-7 h-7 text-foreground" />
                 )}
-              </div>
+              </motion.div>
               
               <div className="flex-1 min-w-0">
-                <h3 className="font-display text-lg font-semibold text-foreground mb-1 flex items-center gap-2">
+                <motion.h3 
+                  className="font-display text-lg font-semibold text-foreground mb-1 flex items-center gap-2"
+                  whileHover={{ x: 5 }}
+                >
                   {link.title}
-                  <ExternalLink className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
-                </h3>
+                  <motion.div
+                    initial={{ opacity: 0, x: -5 }}
+                    whileHover={{ opacity: 1, x: 0 }}
+                  >
+                    <ExternalLink className="w-4 h-4 text-primary" />
+                  </motion.div>
+                </motion.h3>
                 <p className="text-muted-foreground text-sm truncate">
                   {link.description}
                 </p>

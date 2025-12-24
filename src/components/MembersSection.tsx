@@ -79,46 +79,64 @@ export default function MembersSection() {
           {members.map((member, index) => (
             <motion.div
               key={member.name}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              whileHover={{ y: -10 }}
-              className="glass-card rounded-2xl overflow-hidden group"
+              initial={{ opacity: 0, scale: 0.8, y: 50 }}
+              animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
+              transition={{ delay: index * 0.1, duration: 0.6 }}
+              whileHover={{ y: -15, boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)' }}
+              className="glass-card rounded-2xl overflow-hidden group cursor-pointer border border-border/50 hover:border-primary/50 transition-colors"
             >
-              <div className="relative h-48 bg-gradient-to-br from-primary/20 via-card to-accent/20 flex items-center justify-center">
-                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary to-primary-glow flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <div className="relative h-48 bg-gradient-to-br from-primary/20 via-card to-accent/20 flex items-center justify-center overflow-hidden">
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-br from-primary/0 to-accent/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                />
+                <motion.div 
+                  className="w-24 h-24 rounded-full bg-gradient-to-br from-primary to-primary-glow flex items-center justify-center relative z-10"
+                  whileHover={{ scale: 1.15, rotate: 10 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
+                >
                   <User className="w-12 h-12 text-foreground" />
-                </div>
+                </motion.div>
                 <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
               </div>
               
               <div className="p-5 text-center">
-                <h3 className="font-display text-lg font-semibold text-foreground mb-1">
+                <motion.h3 
+                  className="font-display text-lg font-semibold text-foreground mb-1"
+                  whileHover={{ scale: 1.05 }}
+                >
                   {member.name}
-                </h3>
-                <p className="text-primary font-medium text-sm mb-1">
+                </motion.h3>
+                <motion.p 
+                  className="text-primary font-medium text-sm mb-1"
+                  whileHover={{ color: '#60a5fa' }}
+                >
                   {member.role}
-                </p>
+                </motion.p>
                 <p className="text-muted-foreground text-xs mb-4">
                   {member.department}
                 </p>
                 
-                <div className="flex justify-center gap-3">
+                <motion.div 
+                  className="flex justify-center gap-3"
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: 1 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <motion.button
-                    whileHover={{ scale: 1.2, rotate: 5 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="w-9 h-9 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-foreground transition-colors"
+                    whileHover={{ scale: 1.25, rotate: 5 }}
+                    whileTap={{ scale: 0.85 }}
+                    className="w-9 h-9 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center text-white shadow-lg hover:shadow-xl transition-shadow"
                   >
                     <Instagram className="w-4 h-4" />
                   </motion.button>
                   <motion.button
-                    whileHover={{ scale: 1.2, rotate: -5 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="w-9 h-9 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-foreground transition-colors"
+                    whileHover={{ scale: 1.25, rotate: -5 }}
+                    whileTap={{ scale: 0.85 }}
+                    className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-400 to-blue-700 flex items-center justify-center text-white shadow-lg hover:shadow-xl transition-shadow"
                   >
                     <Linkedin className="w-4 h-4" />
                   </motion.button>
-                </div>
+                </motion.div>
               </div>
             </motion.div>
           ))}

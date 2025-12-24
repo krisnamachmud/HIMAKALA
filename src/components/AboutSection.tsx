@@ -59,18 +59,25 @@ export default function AboutSection() {
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
-              initial={{ opacity: 0, y: 50 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: index * 0.15, duration: 0.6 }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="glass-card p-6 rounded-2xl hover-lift cursor-pointer group"
+              initial={{ opacity: 0, y: 50, rotateX: 20 }}
+              animate={isInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
+              transition={{ delay: index * 0.15, duration: 0.6, type: 'spring' }}
+              whileHover={{ y: -12, scale: 1.05, boxShadow: '0 20px 40px rgba(0, 0, 0, 0.2)' }}
+              className="glass-card p-6 rounded-2xl hover-lift cursor-pointer group border border-border/50 hover:border-primary/50 transition-colors"
             >
-              <div className={`w-14 h-14 rounded-xl ${feature.bgColor} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+              <motion.div 
+                className={`w-14 h-14 rounded-xl ${feature.bgColor} flex items-center justify-center mb-4`}
+                whileHover={{ rotate: 10, scale: 1.15 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <feature.icon className={`w-7 h-7 ${feature.color}`} />
-              </div>
-              <h3 className="font-display text-xl font-semibold text-foreground mb-2">
+              </motion.div>
+              <motion.h3 
+                className="font-display text-xl font-semibold text-foreground mb-2"
+                whileHover={{ x: 5 }}
+              >
                 {feature.title}
-              </h3>
+              </motion.h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
                 {feature.description}
               </p>
