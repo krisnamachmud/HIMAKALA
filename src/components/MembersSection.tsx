@@ -156,7 +156,7 @@ export default function MembersSection() {
             animate={{ opacity: [0.7, 1, 0.7] }}
             transition={{ repeat: Infinity, duration: 2.5 }}
           >
-            <span>↓</span> Jelajahi Divisi <span>↓</span>
+           
           </motion.div>
         </motion.div>
       </div>
